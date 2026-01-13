@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: emcon-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - ./data/qdrant:/qdrant/storage
+
+  tei:
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-latest
+    container_name: emcon-tei
+    ports:
+      - "8081:80"
+    environment:
+      # Pick a good default embedding model (384-dim)
+      - MODEL_ID=BAAI/bge-small-en-v1.5
+    volumes:
+      # Optional (recommended): cache model weights on disk so restarts are fast
+      - ./data/hf-cache:/data
+    # If you have a GPU machine later, we can add the right runtime flags.
