@@ -11,6 +11,7 @@ import { analyzeRfpRouter } from "./modules/rfps/routes/analyzeRfp";
 import { understandRfpRouter } from "./modules/rfps/routes/understandRfp";
 import kbCandidatesRoutes from "./modules/rfps/routes/kbCandidates";
 import rfpRunEventsRoutes from "./modules/rfps/routes/runEvents";
+import kbRoutes from "./modules/kb/routes";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/rfps", kbCandidatesRoutes);
 app.use("/rfps", understandRfpRouter);
 app.use("/rfps", analyzeRfpRouter);
 app.use("/rfps", rfpsRoutes); // /rfps/:id (greedy)
+app.use("/kb", kbRoutes);
 app.use("/debug", vectorIndexDebugRoutes);
 app.use("/admin/reindex", reindexAdminRoutes);
 app.use("/search", searchRfpChunksRoutes);
